@@ -32,7 +32,7 @@ This architecture has several advantages:
 
 When a class inherits from `Hanami::Repository`, it will receive the following interface:
 
-  * `#create(data)` – Create a record for the given data and return an entity
+  * `#create(data)` – Create a record(s) for the given data and return an entity
   * `#update(id, data)` – Update the record corresponding to the id and return the updated entity
   * `#delete(id)` – Delete the record corresponding to the given entity
   * `#all` - Fetch all the entities from the collection
@@ -49,6 +49,9 @@ repository = BookRepository.new
 
 book = repository.create(title: "Hanami")
   # => #<Book:0x007f95cbd8b7c0 @attributes={:id=>1, :title=>"Hanami", :created_at=>2016-11-13 16:02:37 UTC, :updated_at=>2016-11-13 16:02:37 UTC}>
+
+# you can create more than one record in transaction
+repository.create([{ title: "Hanami" }, { title: "Ruby"}])
 
 book = repository.find(book.id)
   # => #<Book:0x007f95cbd5a030 @attributes={:id=>1, :title=>"Hanami", :created_at=>2016-11-13 16:02:37 UTC, :updated_at=>2016-11-13 16:02:37 UTC}>
